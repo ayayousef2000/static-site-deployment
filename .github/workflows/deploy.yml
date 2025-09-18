@@ -3,8 +3,7 @@ name: Deploy MkDocs to Yandex Cloud
 on:
   push:
     branches:
-      - main  # IMPORTANT: Change this to 'master' if your main branch is called master
-
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,7 +17,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install MkDocs and dependencies
-        run: pip install mkdocs
+        run: pip install mkdocs-material
 
       - name: Build MkDocs site
         run: mkdocs build
