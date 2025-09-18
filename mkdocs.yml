@@ -1,1 +1,27 @@
-site_name: My Docs
+site_name: Aya Yousef
+site_author: Aya Yousef
+site_description: Personal resume for Aya Yousef, Web Technology student.
+
+copyright: Copyright &copy; 2025 Aya Yousef
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: teal
+    accent: indigo
+  features:
+    - navigation.top
+
+plugins: []
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/aya-yousef-418884272/
+    - icon: fontawesome/solid/envelope
+      link: mailto:eng.aya.yousef.2000@gmail.com
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
