@@ -1,0 +1,36 @@
+name: Deploy MkDocs to Yandex Cloud
+
+on:
+  push:
+    branches:
+      - main  # IMPORTANT: Change this to 'master' if your main branch is called master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs and dependencies
+        run: pip install mkdocs
+
+      - name: Build MkDocs site
+        run: mkdocs build
+
+      - name: Upload to Yandex Object Storage
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.YC_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_S3_ENDPOINT: 'https://storage.yandexcloud.net'
+          AWS_REGION: 'ru-central1' 
+          SOURCE_DIR: 'site'
